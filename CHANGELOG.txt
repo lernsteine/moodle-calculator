@@ -1,0 +1,19 @@
+Changelog for block_simplecalculator
+===================================
+
+Version 1.0.3 – Final Layout
+----------------------------
+- Button layout matches preview (123... layout)
+- Uses inline script for full JS compatibility
+- Updated labels (x for multiplication, c for clear)
+- Decimal input uses comma
+- Fully Moodle 4+ compatible
+
+Version 1.0.2
+-------------
+- Inline JavaScript version (no AMD)
+- Full functionality restored
+
+Version 1.0.0–1.0.1
+-------------------
+- Initial versions with AMD-based calculator (obsolete)

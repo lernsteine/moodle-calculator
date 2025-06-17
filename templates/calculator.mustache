@@ -1,0 +1,37 @@
+<div id="calculator-block">
+    <div id="display">0</div>
+    <div class="calculator-buttons">
+        <div><button data-value="1">1</button><button data-value="2">2</button><button data-value="3">3</button></div>
+        <div><button data-value="4">4</button><button data-value="5">5</button><button data-value="6">6</button></div>
+        <div><button data-value="7">7</button><button data-value="8">8</button><button data-value="9">9</button></div>
+        <div><button data-value="+">+</button><button data-value="0">0</button><button data-value="-">-</button></div>
+        <div><button data-value="*">x</button><button data-value="/">/</button><button data-value=",">,</button></div>
+        <div><button data-value="C">c</button><button data-value="=">=</button></div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let current = '';
+    const display = document.getElementById('display');
+    const buttons = document.querySelectorAll('.calculator-buttons button');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            let val = this.dataset.value;
+            if (val === 'C') {
+                current = '';
+            } else if (val === '=') {
+                try {
+                    current = String(Function('"use strict";return (' + current.replace(',', '.') + ')')());
+                } catch {
+                    current = 'Error';
+                }
+            } else {
+                current += val;
+            }
+            display.textContent = current || '0';
+        });
+    });
+});
+</script>
