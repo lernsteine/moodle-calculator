@@ -1,0 +1,32 @@
+# GitHub Actions for Moodle plugin CI
+name: Moodle Plugin CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    name: Validate PHP and Moodle coding style
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+        extensions: mbstring, xml, curl, zip, json
+        coverage: none
+
+    - name: Install moodle-plugin-ci
+      run: |
+        composer global require moodlehq/moodle-plugin-ci
+        echo "$HOME/.composer/vendor/bin" >> $GITHUB_PATH
+
+    - name: Install dependencies
+      run: moodle-plugin-ci install
+
+    - name: Run code checks
+      run: moodle-plugin-ci lint
